@@ -208,11 +208,38 @@ class LinkedList
     end
   end
 
-  # TODO - write tests for it
   def remove_at(index)
     return if (index.class != Integer or
               index < 0 or index >= @size or @size == 0)
 
-    # TODO
+    dummy = Node.new(nil, @head)
+    prev = dummy
+    curr = dummy.next_node
+    i = 0
+
+    while curr
+      if i != index
+        prev = curr
+        curr = curr.next_node
+        i += 1
+        next
+      end
+
+      nxt = curr.next_node
+
+      # handles 1-sized lists
+      if curr == @head && curr == @tail
+        @head = nil
+        @tail = nil
+      else
+        @head = nxt if curr == @head
+        @tail = prev if curr == @tail
+      end
+
+      curr.next_node = nil
+      prev.next_node = nxt
+      @size -= 1
+      break
+    end
   end
 end

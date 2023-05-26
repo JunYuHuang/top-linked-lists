@@ -298,14 +298,46 @@ RSpec.describe 'LinkedList class' do
       expect(list.tail).to eq(nil)
     end
 
-    # it "inserts a new node at the list's start if called with (6, 0) on a non-empty list" do
-    #   list = LinkedList.new([1,2,3])
-    #   list.insert_at(6, 0)
-    #   expect(list.size).to eq(4)
-    #   expect(list.head.value).to eq(6)
-    #   expect(list.tail.value).to eq(3)
-    #   expect(list.at(0).value).to eq(6)
-    #   expect(list.at(1).value).to eq(1)
-    # end
+    it "removes the node at the list's start if called with 0 on a 3-node sized list" do
+      list = LinkedList.new([1,2,3])
+      list.remove_at(0)
+      expect(list.size).to eq(2)
+      expect(list.head.value).to eq(2)
+      expect(list.tail.value).to eq(3)
+      expect(list.at(0).value).to eq(2)
+      expect(list.at(1).value).to eq(3)
+    end
+
+    it "removes the node at the list's end if called with 0 on a 3-node sized list" do
+      list = LinkedList.new([1,2,3])
+      list.remove_at(2)
+      expect(list.size).to eq(2)
+      expect(list.head.value).to eq(1)
+      expect(list.tail.value).to eq(2)
+      expect(list.at(0).value).to eq(1)
+      expect(list.at(1).value).to eq(2)
+    end
+
+    it "removes the node at position 1 if called with 1 on a 4-node sized list" do
+      list = LinkedList.new([1,2,3,4])
+      list.remove_at(1)
+      expect(list.size).to eq(3)
+      expect(list.head.value).to eq(1)
+      expect(list.tail.value).to eq(4)
+      expect(list.at(0).value).to eq(1)
+      expect(list.at(1).value).to eq(3)
+      expect(list.at(2).value).to eq(4)
+    end
+
+    it "removes the node at position 2 if called with 2 on a 4-node sized list" do
+      list = LinkedList.new([1,2,3,4])
+      list.remove_at(2)
+      expect(list.size).to eq(3)
+      expect(list.head.value).to eq(1)
+      expect(list.tail.value).to eq(4)
+      expect(list.at(0).value).to eq(1)
+      expect(list.at(1).value).to eq(2)
+      expect(list.at(2).value).to eq(4)
+    end
   end
 end
