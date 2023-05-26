@@ -56,4 +56,4 @@ build-iPhoneSimulator/
 # .rubocop-https?--*
 
 # custom
-Planning.md
+dummy_tests.rb
