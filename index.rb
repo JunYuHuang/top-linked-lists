@@ -82,7 +82,8 @@ class LinkedList
   end
 
   def at(index)
-    return nil if index < 0 or index >= @size or @size == 0
+    return nil if (index.class != Integer or index < 0 or
+                  index >= @size or @size == 0)
 
     curr = @head
     i = 0
@@ -162,13 +163,56 @@ class LinkedList
 
   # extra credit (optional)
 
-  # TODO - write tests for it
   def insert_at(value, index)
-    # TODO
+    return if (index.class != Integer or index < 0 or
+              (index >= @size && @size >= 1) or
+              (index != 0 && size == 0))
+
+    if @size == 0
+      curr = Node.new(value)
+      @head = curr
+      @tail = curr
+      @size += 1
+      return
+    end
+
+    if index == 0
+      curr = Node.new(value, @head)
+      @head = curr
+      @size += 1
+      return
+    end
+
+    if index == @size - 1
+      curr = Node.new(value)
+      @tail.next_node = curr
+      @tail = curr
+      @size += 1
+      return
+    end
+
+    dummy = Node.new(nil, @head)
+    prev = dummy
+    curr = dummy.next_node
+    i = 0
+    while curr
+      if i == index
+        new_node = Node.new(value, curr)
+        prev.next_node = new_node
+        @size += 1
+        break
+      end
+      prev = curr
+      curr = curr.next_node
+      i += 1
+    end
   end
 
   # TODO - write tests for it
   def remove_at(index)
+    return if (index.class != Integer or
+              index < 0 or index >= @size or @size == 0)
+
     # TODO
   end
 end

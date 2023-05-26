@@ -183,4 +183,129 @@ RSpec.describe 'LinkedList class' do
       expect(list.to_s).to eq(res)
     end
   end
+
+  describe "insert_at" do
+    it "does nothing if called with (-1, -1) on any list" do
+      list = LinkedList.new
+      list.insert_at(-1, -1)
+      expect(list.size).to eq(0)
+      expect(list.head).to eq(nil)
+      expect(list.tail).to eq(nil)
+    end
+
+    it "does nothing if called with (-1, 3) on a 3-sized list" do
+      list = LinkedList.new([1,2,3])
+      list.insert_at(-1, 3)
+      expect(list.size).to eq(3)
+      expect(list.head.value).to eq(1)
+      expect(list.tail.value).to eq(3)
+    end
+
+    it "does nothing if called with (-1, 1) on an empty list" do
+      list = LinkedList.new
+      list.insert_at(-1, 1)
+      expect(list.size).to eq(0)
+      expect(list.head).to eq(nil)
+      expect(list.tail).to eq(nil)
+    end
+
+    it "inserts a new node at the correct position if called on an empty list" do
+      list = LinkedList.new
+      list.insert_at(0, 0)
+      expect(list.size).to eq(1)
+      expect(list.head.value).to eq(0)
+      expect(list.tail.value).to eq(0)
+    end
+
+    it "inserts a new node at the list's start if called with (6, 0) on a non-empty list" do
+      list = LinkedList.new([1,2,3])
+      list.insert_at(6, 0)
+      expect(list.size).to eq(4)
+      expect(list.head.value).to eq(6)
+      expect(list.tail.value).to eq(3)
+      expect(list.at(0).value).to eq(6)
+      expect(list.at(1).value).to eq(1)
+    end
+
+    it "inserts a new node at the list's end if called with (6, 2) on a non-empty list" do
+      list = LinkedList.new([1,2,3])
+      list.insert_at(6, 2)
+      expect(list.size).to eq(4)
+      expect(list.head.value).to eq(1)
+      expect(list.tail.value).to eq(6)
+      expect(list.at(2).value).to eq(3)
+      expect(list.at(3).value).to eq(6)
+    end
+
+    it "inserts a new node at the correct position if called with (6, 1) on a non-empty list" do
+      list = LinkedList.new([1,2,3])
+      list.insert_at(6, 1)
+      expect(list.size).to eq(4)
+      expect(list.head.value).to eq(1)
+      expect(list.tail.value).to eq(3)
+      expect(list.at(0).value).to eq(1)
+      expect(list.at(1).value).to eq(6)
+      expect(list.at(2).value).to eq(2)
+      expect(list.at(3).value).to eq(3)
+    end
+
+    it "inserts a new node at the correct position if called with (6, 2) on a non-empty list" do
+      list = LinkedList.new([1,2,3,4])
+      list.insert_at(6, 2)
+      expect(list.size).to eq(5)
+      expect(list.head.value).to eq(1)
+      expect(list.tail.value).to eq(4)
+      expect(list.at(0).value).to eq(1)
+      expect(list.at(1).value).to eq(2)
+      expect(list.at(2).value).to eq(6)
+      expect(list.at(3).value).to eq(3)
+      expect(list.at(4).value).to eq(4)
+    end
+  end
+
+  describe "remove_at" do
+    it "does nothing if called with any integer on an empty list" do
+      list = LinkedList.new
+      list.remove_at(-1)
+      expect(list.size).to eq(0)
+      expect(list.head).to eq(nil)
+      expect(list.tail).to eq(nil)
+    end
+
+    it "does nothing if called with a negative index on a non-empty list" do
+      list = LinkedList.new([1])
+      list.remove_at(-1)
+      expect(list.size).to eq(1)
+      expect(list.head.value).to eq(1)
+      expect(list.tail.value).to eq(1)
+      expect(list.at(0).value).to eq(1)
+    end
+
+    it "does nothing if called with an out-of-bounds positive index on a non-empty list" do
+      list = LinkedList.new([1])
+      list.remove_at(1)
+      expect(list.size).to eq(1)
+      expect(list.head.value).to eq(1)
+      expect(list.tail.value).to eq(1)
+      expect(list.at(0).value).to eq(1)
+    end
+
+    it "remove the only node if called with 0 on an 1-node sized list" do
+      list = LinkedList.new([1])
+      list.remove_at(0)
+      expect(list.size).to eq(0)
+      expect(list.head).to eq(nil)
+      expect(list.tail).to eq(nil)
+    end
+
+    # it "inserts a new node at the list's start if called with (6, 0) on a non-empty list" do
+    #   list = LinkedList.new([1,2,3])
+    #   list.insert_at(6, 0)
+    #   expect(list.size).to eq(4)
+    #   expect(list.head.value).to eq(6)
+    #   expect(list.tail.value).to eq(3)
+    #   expect(list.at(0).value).to eq(6)
+    #   expect(list.at(1).value).to eq(1)
+    # end
+  end
 end
